@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const ExpTechCard = ({technologies}) => {
+const ExpTechCard = ({technologies, handleChooseStack}) => {
 // console.log('from card->',technologies)
+
 
 
   return <div className="grid grid-cols-3 gap-2">
  {
   technologies.map(technology => {
-    return  <div className="w-full rounded-[22px] border border-[#e7eef5] bg-white p-7]">
+    return  <div key={technology.id} className="w-full rounded-[22px] border border-[#e7eef5] bg-white py-4 px-2-4]">
       {/* Top */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between px-2">
         {/* Technology Logo */}
         <div className="flex h-12 w-12 items-center justify-center">
           <img
@@ -28,7 +30,7 @@ const ExpTechCard = ({technologies}) => {
       </div>
 
       {/* Middle */}
-      <div className="mt-6">
+      <div className="mt-6 px-2">
         <h3 className="text-[27px] font-bold leading-tight text-[#111827]">
           {technology.name}
         </h3>
@@ -39,7 +41,7 @@ const ExpTechCard = ({technologies}) => {
       </div>
 
       {/* Bottom */}
-      <div className="mt-6 border-t border-[#edf1f5] pt-3">
+      <div className="mt-6 border-t border-[#edf1f5] pt-3 px-2">
         <div className="flex items-center justify-between gap-3">
           {/* Category */}
           <span className="rounded-md bg-[#f3f5f7] px-3 py-1 text-[16px] text-[#52627a]">
@@ -61,9 +63,12 @@ const ExpTechCard = ({technologies}) => {
         {/* Button */}
         <button
           type="button"
-          className="mt-5 w-full rounded-xl bg-[#080d1d] py-3.5 text-[16px] font-medium text-white transition hover:bg-[#151b2d]"
+          className="mt-5 w-full rounded-xl bg-green-500 py-3.5 text-[16px] font-medium text-white transition hover:bg-[#8c99c2]"
+          onClick={()=>handleChooseStack(technology)}
+          // disabled={isSelected?true:false}
         >
-          Add to Stack
+          {/* {isSelected?"✓ Added to Stack":"Add to Stack"} */}
+        Add to Stack
         </button>
       </div>
     </div>

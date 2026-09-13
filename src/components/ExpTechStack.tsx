@@ -1,9 +1,64 @@
-const ExpTechStack = () => {
-    return (
-        <div className="">
-            <h2 className="text-5xl text-yellow-700            ">Stack</h2>
+import { RxCross1 } from "react-icons/rx";
+
+const ExpTechStack = ({ stack }) => {
+  return (
+    <>
+      <div className="py-4">
+        <h3 className="text-4xl text-black-700">Your Stack</h3>
+        <p className="text-2xl">
+          {stack <= 0
+            ? "No technologies selected yet."
+            : `${stack.length} technologies selected`}
+        </p>
+        <div>
+          <div>
+            {stack.map((stkSingleTech) => {
+              return (
+                  <div key={stkSingleTech.id} className="flex w-full items-center justify-between rounded-2xl border border-[#dce5ef] bg-white px-5 py-4 my-2">
+                    {/* Left */}
+                    <div className="flex items-center gap-4">
+                      {/* Logo */}
+                      <div className="flex h-12 w-12 items-center justify-center">
+                        <img
+                          src={stkSingleTech.icon}
+                          alt={`${stkSingleTech.name} logo`}
+                          className="h-11 w-11 object-contain"
+                        />
+                      </div>
+
+                      {/* Name + Category */}
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] font-bold leading-5 text-[#111827]">
+                          {stkSingleTech.name}
+                        </h3>
+
+                        <span className="mt-1 text-[13px] font-medium text-[#91a3bc]">
+                          {stkSingleTech.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* right */}
+                    {/* Remove Button */}
+                    <button
+                      type="button"
+                      className="flex h-10 w-10  text-[#94a7c0] transition hover:text-[#475569]"
+                    >
+                      <RxCross1 size={31} strokeWidth={1.8} />
+                    </button>
+                  </div>
+              );
+            })}
+          </div>
+
+          <p>
+            {" "}
+            {stack.length <= 0 ? "Your stack is empty." : "Can add button"}
+          </p>
         </div>
-    );
+      </div>
+    </>
+  );
 };
 
 export default ExpTechStack;
