@@ -1,6 +1,13 @@
 import { FaStar } from "react-icons/fa";
+import type { ITechnology } from "..";
 
-const ExpTechCard = ({ technologies, handleChooseStack, stack }) => {
+interface ExpTechCardProps {
+  technologies: ITechnology[];
+  handleChooseStack: (technology: ITechnology) => void;
+  stack: ITechnology[];
+}
+
+const ExpTechCard = ({ technologies, handleChooseStack, stack }: ExpTechCardProps) => {
   return (
     <div className="grid grid-cols-3 gap-6">
       {technologies.map((technology) => {

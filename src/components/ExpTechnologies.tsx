@@ -3,16 +3,22 @@ import ExpTechCard from "./ExpTechCard";
 import ExpTechStack from "./ExpTechStack";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify/unstyled";
+import type { ITechnology } from "..";
 
-const ExpTechnologies = ({ technologiesPromise }) => {
+
+interface ExpTechnologiesProps {
+  technologiesPromise: Promise<ITechnology[]>;
+}
+
+const ExpTechnologies = ({ technologiesPromise }:ExpTechnologiesProps) => {
   // get technologies data
   const technologies = use(technologiesPromise);
 
   // ALL STATS
-  const [stack, setStack] = useState([]);
+  const [stack, setStack] = useState<ITechnology[]>([]);
 
   // ALL HANDLERS
-  const handleChooseStack = (technology) => {
+  const handleChooseStack = (technology: ITechnology) => {
     const alreadyExists = stack.some((item) => item.id === technology.id);
 
     if (alreadyExists) {

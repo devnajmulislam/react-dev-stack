@@ -2,8 +2,18 @@ import { RxCross1 } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify/unstyled";
 
-const ExpTechStack = ({ stack, setStack }) => {
-  const handleRemoveStack = (stkSingleTech) => {
+import type { ITechnology } from "..";
+import type { Dispatch, SetStateAction } from "react";
+
+
+interface ExpTechStackProps {
+  stack: ITechnology[];
+  setStack: Dispatch<SetStateAction<ITechnology[]>>;
+}
+
+const ExpTechStack = ({ stack, setStack }:ExpTechStackProps) => {
+
+  const handleRemoveStack = (stkSingleTech: ITechnology) => {
     const remainingStack = stack.filter(
       (singleStack) => singleStack.id !== stkSingleTech.id,
     );
@@ -45,7 +55,7 @@ const ExpTechStack = ({ stack, setStack }) => {
         <div className="mb-5">
           <h3 className="text-2xl font-bold text-gray-900">Your Stack</h3>
           <p className="mt-0.5 text-sm font-medium text-gray-400">
-            {stack <= 0
+            {stack.length === 0
               ? "No technologies selected yet."
               : `${stack.length} technologies selected`}
           </p>
