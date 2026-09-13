@@ -1,7 +1,12 @@
+import { use } from "react";
 import ExpTechCard from "./ExpTechCard";
 import ExpTechStack from "./ExpTechStack";
 
-const ExpTechnologies = () => {
+const ExpTechnologies = ({technologiesPromise}) => {
+
+  const technologies = use(technologiesPromise);
+  // console.log('technologies -> ',technologies)
+
   return (
     <>
       {/* Technology parent */}
@@ -17,13 +22,13 @@ const ExpTechnologies = () => {
         <div className="grid grid-cols-12 gap-4">
           {/* Technology left side */}
           <div className="bg-red-400 col-span-8 ">
-            <ExpTechCard/>
+            <ExpTechCard technologies={technologies}/>
           </div>
 
           {/* Technology right side */}
-         <div className="bg-pink-500 col-span-4">
-             <ExpTechStack />
-         </div>
+          <div className="bg-pink-500 col-span-4">
+            <ExpTechStack />
+          </div>
         </div>
       </div>
     </>

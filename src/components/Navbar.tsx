@@ -2,9 +2,9 @@ import NavLogo from "../assets/logo-text.png";
 
 const Navbar = () => {
   return (
-    <nav >
+    <nav className="navbar-sticky">
         {/* nav parent */}
-      <div className="bg-orange-200 flex justify-between items-center container mx-auto py-4 px-2">
+      <div className="bg-orange-200 flex justify-between items-center container mx-auto py-4 px-2 ">
         {/* Navbar left site */}
         <div>
           <img src={NavLogo} alt="Nav logo" />
