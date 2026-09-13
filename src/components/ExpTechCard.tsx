@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const ExpTechCard = ({technologies, handleChooseStack}) => {
+const ExpTechCard = ({technologies, handleChooseStack,stack}) => {
 // console.log('from card->',technologies)
 
 
@@ -9,6 +9,9 @@ const ExpTechCard = ({technologies, handleChooseStack}) => {
   return <div className="grid grid-cols-3 gap-2">
  {
   technologies.map(technology => {
+
+    const isAdded = stack.some(item => item.id === technology.id);
+
     return  <div key={technology.id} className="w-full rounded-[22px] border border-[#e7eef5] bg-white py-4 px-2-4]">
       {/* Top */}
       <div className="flex items-start justify-between px-2">
@@ -61,15 +64,13 @@ const ExpTechCard = ({technologies, handleChooseStack}) => {
         </div>
 
         {/* Button */}
-        <button
-          type="button"
-          className="mt-5 w-full rounded-xl bg-green-500 py-3.5 text-[16px] font-medium text-white transition hover:bg-[#8c99c2]"
-          onClick={()=>handleChooseStack(technology)}
-          // disabled={isSelected?true:false}
-        >
-          {/* {isSelected?"✓ Added to Stack":"Add to Stack"} */}
-        Add to Stack
-        </button>
+      <button
+  disabled={isAdded}
+  onClick={() => handleChooseStack(technology)}
+  className="mt-5 w-full rounded-xl bg-green-500 py-3.5 text-white disabled:bg-gray-400"
+>
+  {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+</button>
       </div>
     </div>
   })

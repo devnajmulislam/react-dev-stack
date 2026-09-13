@@ -15,6 +15,11 @@ const ExpTechStack = ({ stack, setStack }) => {
 
   };
 
+
+  const handleRemoveAll = () => {
+  setStack([]);
+};
+
   return (
     <>
       <div className="py-4">
@@ -72,7 +77,7 @@ const ExpTechStack = ({ stack, setStack }) => {
             {" "}
             {stack.length <= 0 ? "Your stack is empty." : ""}
             {stack.length > 0 ? (
-              <button className="btn btn-success text-white">Remove All</button>
+              <button  onClick={handleRemoveAll} className="btn btn-success text-white">Remove All</button>
             ) : (
               ""
             )}

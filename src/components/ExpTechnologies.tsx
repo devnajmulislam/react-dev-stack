@@ -15,6 +15,15 @@ const ExpTechnologies = ({technologiesPromise}) => {
 
   // ALL HANDLERS
 const handleChooseStack = (technology) =>{
+
+   const alreadyExists = stack.some(
+    (item) => item.id === technology.id
+  );
+
+  if(alreadyExists){
+    alert("Already exist")
+  }
+
   // setIsSelected(true)
   if(stack.find((element)=> element.name === technology.name)){
     // return alert(`${technology.name} already added in your stack!`)
@@ -54,8 +63,6 @@ transition: Bounce,
 
 }
 
-// console.log("stack", stack);
-// console.log('length',stack.length)
 
   return (
     <>
@@ -72,7 +79,7 @@ transition: Bounce,
         <div className="grid grid-cols-12 gap-4">
           {/* Technology left side */}
           <div className=" col-span-8 ">
-            <ExpTechCard technologies={technologies} handleChooseStack={handleChooseStack}/>
+            <ExpTechCard technologies={technologies} handleChooseStack={handleChooseStack}   stack={stack}/>
           </div>
 
           {/* Technology right side */}
