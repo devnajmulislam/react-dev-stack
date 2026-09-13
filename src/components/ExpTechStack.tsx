@@ -95,7 +95,7 @@ const ExpTechStack = ({ stack, setStack }) => {
             })}
           </div>
           {/* Remove button and empty page when doesn't choose any stack */}
-          <p className="pt-6">
+          <div className="pt-6">
             {" "}
             {stack.length <= 0 ? (
               <div className="flex h-36 w-full items-center justify-center rounded-2xl border border-dashed border-[#e2e8f0] p-6 text-center text-sm font-medium text-gray-400">
@@ -114,7 +114,7 @@ const ExpTechStack = ({ stack, setStack }) => {
             ) : (
               ""
             )}
-          </p>
+          </div>
         </div>
       </div>
     </>
