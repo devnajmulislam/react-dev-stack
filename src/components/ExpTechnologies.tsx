@@ -4,87 +4,83 @@ import ExpTechStack from "./ExpTechStack";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify/unstyled";
 
-const ExpTechnologies = ({technologiesPromise}) => {
-// get technologies data 
+const ExpTechnologies = ({ technologiesPromise }) => {
+  // get technologies data
   const technologies = use(technologiesPromise);
-  // console.log('technologies -> ',technologies)
 
   // ALL STATS
-  const [stack, setStack] = useState([])
-  // const [isSelected, setIsSelected] = useState(false)
+  const [stack, setStack] = useState([]);
 
   // ALL HANDLERS
-const handleChooseStack = (technology) =>{
+  const handleChooseStack = (technology) => {
+    const alreadyExists = stack.some((item) => item.id === technology.id);
 
-   const alreadyExists = stack.some(
-    (item) => item.id === technology.id
-  );
+    if (alreadyExists) {
+      alert("Already exist");
+    }
 
-  if(alreadyExists){
-    alert("Already exist")
-  }
+    if (stack.find((element) => element.name === technology.name)) {
+      // return alert(`${technology.name} already added in your stack!`)
 
-  // setIsSelected(true)
-  if(stack.find((element)=> element.name === technology.name)){
-    // return alert(`${technology.name} already added in your stack!`)
+      return toast.error(`${technology.name} already added in your stack!`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
+    const stackTechnologies = [...stack, technology];
 
-   return toast.error(`${technology.name} already added in your stack!`, {
-position: "bottom-right",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "colored",
-transition: Bounce,
-});
+    setStack(stackTechnologies);
 
-  }
-const stackTechnologies = [...stack, technology]
+    // alert(`${technology.name} added in your Stack.`)
 
-
-setStack(stackTechnologies);
-
-// alert(`${technology.name} added in your Stack.`)
-
-toast.success(`${technology.name} added in your Stack.`, {
-position: "bottom-right",
-autoClose: 5000,
-hideProgressBar: false,
-closeOnClick: false,
-pauseOnHover: true,
-draggable: true,
-progress: undefined,
-theme: "colored",
-transition: Bounce,
-});
-
-
-}
-
+    toast.success(`${technology.name} added in your Stack.`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+  };
 
   return (
     <>
       {/* Technology parent */}
       <div className="container mx-auto">
-        <h2 className="text-7xl text-black font-bold py-3">
-          Explore the <span>Technologies</span>
-        </h2>
-        <p className="text-2xl">
-          Pick one technology per category to build your ideal stack.
-        </p>
+        {/* Technologies section heading and descripton */}
+        <div className="mb-8">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900">
+            Explore the <span className="text-pink-500">Technologies</span>
+          </h2>
+          <p className="text-slate-500 md:text-lg mt-4">
+            Pick one technology per category to build your ideal stack.
+          </p>
+        </div>
 
         {/* technology two coloums parent */}
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Technology left side */}
-          <div className=" col-span-8 ">
-            <ExpTechCard technologies={technologies} handleChooseStack={handleChooseStack}   stack={stack}/>
+          <div className="lg:col-span-8">
+            <ExpTechCard
+              technologies={technologies}
+              handleChooseStack={handleChooseStack}
+              stack={stack}
+            />
           </div>
 
           {/* Technology right side */}
-          <div className=" col-span-4">
-            <ExpTechStack stack={stack} setStack={setStack}/>
+          <div className="lg:col-span-4">
+            <ExpTechStack stack={stack} setStack={setStack} />
           </div>
         </div>
       </div>

@@ -1,81 +1,83 @@
-import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const ExpTechCard = ({technologies, handleChooseStack,stack}) => {
-// console.log('from card->',technologies)
+const ExpTechCard = ({ technologies, handleChooseStack, stack }) => {
+  return (
+    <div className="grid grid-cols-3 gap-6">
+      {technologies.map((technology) => {
+        const isAdded = stack.some((item) => item.id === technology.id);
 
+        return (
+          <div
+            key={technology.id}
+            className="w-full rounded-[28px] border border-[#f1f3f5] bg-white p-7 shadow-sm hover:shadow-md"
+          >
+            {/* Top */}
+            <div className="flex items-start justify-between">
+              {/* Technology Logo */}
+              <div className="flex h-12 w-12 items-center justify-center">
+                <img
+                  src={technology.icon}
+                  alt={`${technology.name} logo`}
+                  className="h-10 w-10 object-contain"
+                />
+              </div>
 
+              {/* Badge */}
 
-  return <div className="grid grid-cols-3 gap-2">
- {
-  technologies.map(technology => {
+              <span className="rounded-full border border-[#dff1fd] bg-[#f0f8ff] px-4 py-1 text-[15px] font-semibold text-[#00a6fb]">
+                {technology.badge}
+              </span>
+            </div>
 
-    const isAdded = stack.some(item => item.id === technology.id);
+            {/* Middle */}
+            <div className="mt-6">
+              <h3 className="text-[28px] font-bold text-[#111827]">
+                {technology.name}
+              </h3>
 
-    return  <div key={technology.id} className="w-full rounded-[22px] border border-[#e7eef5] bg-white py-4 px-2-4]">
-      {/* Top */}
-      <div className="flex items-start justify-between px-2">
-        {/* Technology Logo */}
-        <div className="flex h-12 w-12 items-center justify-center">
-          <img
-            src={technology.icon}
-            alt={`${technology.name} logo`}
-            className="h-10 w-10 object-contain"
-          />
-        </div>
+              <p className="mt-3 text-[16px] text-[#6b7280]5]">
+                {technology.description}
+              </p>
+            </div>
 
-        {/* Badge */}
-   
-          <span className="rounded-full border border-[#d5edff] bg-[#f0f9ff] px-4 py-1.5 text-[16px] font-medium text-[#0099e9]">
-            {technology.badge}
-          </span>
-   
-      </div>
+            {/* Bottom */}
+            <div className="mt-6 border-t border-[#f3f4f6] pt-5">
+              <div className="flex items-center justify-between">
+                {/* Category */}
+                <span className="rounded-lg bg-[#f3f4f6] px-3 py-1.5 text-[14px] font-medium text-[#4b5563]">
+                  {technology.category}
+                </span>
 
-      {/* Middle */}
-      <div className="mt-6 px-2">
-        <h3 className="text-[27px] font-bold leading-tight text-[#111827]">
-          {technology.name}
-        </h3>
+                {/* Level */}
+                <span className="text-[15px] font-medium text-[#6b7280]">
+                  {technology.difficulty}
+                </span>
 
-        <p className="mt-3 text-[17px] leading-7 text-[#657895]">
-          {technology.description}
-        </p>
-      </div>
+                {/* Rating */}
+                <div className="flex items-center gap-1.5 text-[15px] font-semibold text-[#111827]">
+                  <FaStar className="text-[#fbbf24]" size={16} />
+                  <span>{technology.rating}</span>
+                </div>
+              </div>
 
-      {/* Bottom */}
-      <div className="mt-6 border-t border-[#edf1f5] pt-3 px-2">
-        <div className="flex items-center justify-between gap-3">
-          {/* Category */}
-          <span className="rounded-md bg-[#f3f5f7] px-3 py-1 text-[16px] text-[#52627a]">
-            {technology.category}
-          </span>
-
-          {/* Level */}
-          <span className="text-[16px] text-[#61728f]">
-            {technology.difficulty}
-          </span>
-
-          {/* Rating */}
-          <div className="flex items-center gap-1.5 text-[16px] text-[#334155]">
-            <FaStar className="text-[#fbbf24]" size={16} />
-            <span>{technology.rating}</span>
+              {/* Button */}
+              <button
+                disabled={isAdded}
+                onClick={() => handleChooseStack(technology)}
+                className={`mt-6 w-full rounded-2xl py-4 text-[16px] font-semibold ${
+                  isAdded
+                    ? "bg-[#e5e7eb] text-[#9ca3af] "
+                    : "bg-[#0d1322] text-white hover:bg-black "
+                }`}
+              >
+                {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Button */}
-      <button
-  disabled={isAdded}
-  onClick={() => handleChooseStack(technology)}
-  className="mt-5 w-full rounded-xl bg-green-500 py-3.5 text-white disabled:bg-gray-400"
->
-  {isAdded ? "✓ Added to Stack" : "Add to Stack"}
-</button>
-      </div>
+        );
+      })}
     </div>
-  })
- }
-  </div>;
+  );
 };
 
 export default ExpTechCard;
