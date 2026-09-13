@@ -1,24 +1,47 @@
 import { RxCross1 } from "react-icons/rx";
+import { toast } from "react-toastify";
+import { Bounce } from "react-toastify/unstyled";
 
 const ExpTechStack = ({ stack, setStack }) => {
   // console.log("stacl=?", stack)
 
   const handleRemoveStack = (stkSingleTech) => {
-   const remainingStack = stack.filter(
-    (singleStack) => singleStack.id !== stkSingleTech.id
-  );
+    const remainingStack = stack.filter(
+      (singleStack) => singleStack.id !== stkSingleTech.id,
+    );
 
-  setStack(remainingStack);
+    setStack(remainingStack);
 
-  // Should added toaster,now avoid because codes look so messy
-  alert(`${stkSingleTech.name} is deleted!`)
+    // Should added toaster,now avoid because codes look so messy
+    // alert(`${stkSingleTech.name} is deleted!`);
 
+    toast.error(`${stkSingleTech.name} is deleted!`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
   };
 
-
   const handleRemoveAll = () => {
-  setStack([]);
-};
+    setStack([]);
+    toast.warn("Your stack cleared!", {
+position: "bottom-right",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+transition: Bounce,
+});
+  };
 
   return (
     <>
@@ -64,7 +87,7 @@ const ExpTechStack = ({ stack, setStack }) => {
                   {/* Remove Button */}
                   <button
                     className="flex h-10 w-10  text-[#94a7c0] transition hover:text-[#475569]"
-                    onClick={()=>handleRemoveStack(stkSingleTech)}
+                    onClick={() => handleRemoveStack(stkSingleTech)}
                   >
                     <RxCross1 size={31} strokeWidth={1.8} />
                   </button>
@@ -77,7 +100,12 @@ const ExpTechStack = ({ stack, setStack }) => {
             {" "}
             {stack.length <= 0 ? "Your stack is empty." : ""}
             {stack.length > 0 ? (
-              <button  onClick={handleRemoveAll} className="btn btn-success text-white">Remove All</button>
+              <button
+                onClick={handleRemoveAll}
+                className="btn btn-success text-white"
+              >
+                Remove All
+              </button>
             ) : (
               ""
             )}

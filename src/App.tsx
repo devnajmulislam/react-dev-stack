@@ -19,7 +19,7 @@ function App() {
   return <>
   <Navbar/>
   <Banner/>
-  <Suspense fallback={<h1>Loading....</h1>}>
+  <Suspense fallback={<span className="loading loading-spinner text-primary"></span>}>
     <ExpTechnologies technologiesPromise={technologiesPromise()}/>
   </Suspense>
   <Footer/>
