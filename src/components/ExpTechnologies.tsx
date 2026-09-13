@@ -77,7 +77,7 @@ transition: Bounce,
 
           {/* Technology right side */}
           <div className=" col-span-4">
-            <ExpTechStack stack={stack}/>
+            <ExpTechStack stack={stack} setStack={setStack}/>
           </div>
         </div>
       </div>
